@@ -76,9 +76,9 @@
             this.lblTimeUtc = new System.Windows.Forms.Label();
             this.lblTimeLocal = new System.Windows.Forms.Label();
             this.gbxCommand = new System.Windows.Forms.GroupBox();
-            this.btnAuxCmd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbAuxCmd = new System.Windows.Forms.TextBox();
+            this.btnAuxCmd = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.gbxDeviceInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
@@ -598,16 +598,6 @@
             this.gbxCommand.TabStop = false;
             this.gbxCommand.Text = "Commands";
             // 
-            // btnAuxCmd
-            // 
-            this.btnAuxCmd.Location = new System.Drawing.Point(65, 70);
-            this.btnAuxCmd.Name = "btnAuxCmd";
-            this.btnAuxCmd.Size = new System.Drawing.Size(158, 32);
-            this.btnAuxCmd.TabIndex = 2;
-            this.btnAuxCmd.Text = "Send Auxiliary Command";
-            this.btnAuxCmd.UseVisualStyleBackColor = true;
-            this.btnAuxCmd.Click += new System.EventHandler(this.btnAuxCmd_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -623,6 +613,17 @@
             this.tbAuxCmd.Name = "tbAuxCmd";
             this.tbAuxCmd.Size = new System.Drawing.Size(274, 20);
             this.tbAuxCmd.TabIndex = 0;
+            this.tbAuxCmd.Text = "tt:IRLamp|Auto";
+            // 
+            // btnAuxCmd
+            // 
+            this.btnAuxCmd.Location = new System.Drawing.Point(65, 70);
+            this.btnAuxCmd.Name = "btnAuxCmd";
+            this.btnAuxCmd.Size = new System.Drawing.Size(158, 32);
+            this.btnAuxCmd.TabIndex = 2;
+            this.btnAuxCmd.Text = "Send Auxiliary Command";
+            this.btnAuxCmd.UseVisualStyleBackColor = true;
+            this.btnAuxCmd.Click += new System.EventHandler(this.btnAuxCmd_Click);
             // 
             // Form1
             // 
