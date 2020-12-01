@@ -75,12 +75,17 @@
             this.btnSubscribe = new System.Windows.Forms.Button();
             this.lblTimeUtc = new System.Windows.Forms.Label();
             this.lblTimeLocal = new System.Windows.Forms.Label();
+            this.gbxCommand = new System.Windows.Forms.GroupBox();
+            this.btnAuxCmd = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbAuxCmd = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.gbxDeviceInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.gbxPtzControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPtzCmdSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCmdDuration)).BeginInit();
+            this.gbxCommand.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGetOnvifInfo
@@ -115,9 +120,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tssLbl});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 640);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 623);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(866, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1127, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -541,7 +546,7 @@
             this.lbxEvents.FormattingEnabled = true;
             this.lbxEvents.Location = new System.Drawing.Point(12, 539);
             this.lbxEvents.Name = "lbxEvents";
-            this.lbxEvents.Size = new System.Drawing.Size(842, 82);
+            this.lbxEvents.Size = new System.Drawing.Size(1097, 56);
             this.lbxEvents.TabIndex = 18;
             // 
             // lblEvents
@@ -581,11 +586,50 @@
             this.lblTimeLocal.TabIndex = 22;
             this.lblTimeLocal.Text = "Local Time";
             // 
+            // gbxCommand
+            // 
+            this.gbxCommand.Controls.Add(this.label1);
+            this.gbxCommand.Controls.Add(this.tbAuxCmd);
+            this.gbxCommand.Controls.Add(this.btnAuxCmd);
+            this.gbxCommand.Location = new System.Drawing.Point(823, 21);
+            this.gbxCommand.Name = "gbxCommand";
+            this.gbxCommand.Size = new System.Drawing.Size(286, 484);
+            this.gbxCommand.TabIndex = 23;
+            this.gbxCommand.TabStop = false;
+            this.gbxCommand.Text = "Commands";
+            // 
+            // btnAuxCmd
+            // 
+            this.btnAuxCmd.Location = new System.Drawing.Point(65, 70);
+            this.btnAuxCmd.Name = "btnAuxCmd";
+            this.btnAuxCmd.Size = new System.Drawing.Size(158, 32);
+            this.btnAuxCmd.TabIndex = 2;
+            this.btnAuxCmd.Text = "Send Auxiliary Command";
+            this.btnAuxCmd.UseVisualStyleBackColor = true;
+            this.btnAuxCmd.Click += new System.EventHandler(this.btnAuxCmd_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "AuxiliaryCommand";
+            // 
+            // tbAuxCmd
+            // 
+            this.tbAuxCmd.Location = new System.Drawing.Point(6, 44);
+            this.tbAuxCmd.Name = "tbAuxCmd";
+            this.tbAuxCmd.Size = new System.Drawing.Size(274, 20);
+            this.tbAuxCmd.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 662);
+            this.ClientSize = new System.Drawing.Size(1127, 645);
+            this.Controls.Add(this.gbxCommand);
             this.Controls.Add(this.lblTimeLocal);
             this.Controls.Add(this.lblTimeUtc);
             this.Controls.Add(this.btnSubscribe);
@@ -615,6 +659,8 @@
             this.gbxPtzControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPtzCmdSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCmdDuration)).EndInit();
+            this.gbxCommand.ResumeLayout(false);
+            this.gbxCommand.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -669,6 +715,10 @@
         private System.Windows.Forms.Button btnSubscribe;
         private System.Windows.Forms.Label lblTimeUtc;
         private System.Windows.Forms.Label lblTimeLocal;
+        private System.Windows.Forms.GroupBox gbxCommand;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbAuxCmd;
+        private System.Windows.Forms.Button btnAuxCmd;
     }
 }
 

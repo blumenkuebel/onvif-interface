@@ -128,6 +128,7 @@ namespace Onvif_Interface
             client.Endpoint.Behaviors.Add(new EndpointDiscoveryBehavior());
 
             gbxPtzControl.Visible = true;
+            gbxCommand.Visible = true;
 
             // We can now ask for information
             // ONVIF application programmer guide (5.1.3) suggests checking time first
@@ -148,12 +149,14 @@ namespace Onvif_Interface
             if (lbxCapabilities.Items.Contains(OnvifNamespace.PTZ))
             {
                 gbxPtzControl.Enabled = true;
+                gbxCommand.Enabled = true;
                 GetPtzServices(ip, port, DeviceTimeOffset);
                 //PTZTest(client, DeviceTimeOffset, ip, port);
             }
             else
             {
                 gbxPtzControl.Enabled = false;
+                gbxCommand.Enabled = false;
             }
 
             GetMediaInfo(DeviceTimeOffset);
@@ -477,20 +480,6 @@ namespace Onvif_Interface
             ptz.Stop();
         }
 
-        private void btnSetConnectInfo_Click(object sender, EventArgs e)
-        {
-            IP = txtIP.Text;
-            Port = (int)numPort.Value;
-
-            // ODM Axis example
-            //string password = "Sierra123";
-            //string nonce = "h3dfca1Z/E+Wm15KYE78mgUAAAAAAA==";
-            //string date = "2017-03-08T17:11:48.000Z";
-            //string digest = "kkj/3C2oLKU57bzYCMKLAKjbheo=";
-
-            //GetWsPasswordDigest("admin", password, nonce, date, digest);
-        }
-
         public void GetWsPasswordDigest(string user, string password, string nonce, string timestamp, string digest = "")
         {
             var nonceDecodeBinary = Convert.FromBase64String(nonce);
@@ -667,6 +656,21 @@ namespace Onvif_Interface
         private void numPort_ValueChanged(object sender, EventArgs e)
         {
             Port = (int)numPort.Value;
+        }
+
+        private void btnAuxCmd_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            OnvifPtz ptz = new OnvifPtz(ServiceUris[OnvifNamespace.MEDIA], ServiceUris[OnvifNamespace.PTZ], DeviceTimeOffset, txtUser.Text, txtPassword.Text);
+            try
+            {
+                Console.WriteLine(string.Format("Send AuxCmd {0}", tbAuxCmd.Text));
+                tssLbl.Text = ptz.SendAuxiliaryCommand(tbAuxCmd.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

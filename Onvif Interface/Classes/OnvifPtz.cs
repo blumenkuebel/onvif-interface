@@ -173,6 +173,11 @@ namespace SDS.Video.Onvif
             }
         }
 
+        public string SendAuxiliaryCommand(string command)
+        {
+            return PtzClient.SendAuxiliaryCommand(PtzClient.GetNode("1").Name, command);
+        }
+
         public bool IsValidPresetToken(string profileToken, string presetToken)
         {
             PTZPreset[] presets = PtzClient.GetPresets(profileToken);
