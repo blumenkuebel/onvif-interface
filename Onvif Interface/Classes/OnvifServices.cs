@@ -1,16 +1,15 @@
 ﻿using Onvif_Interface.OnvifDeviceManagementServiceReference;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Net;
+using Onvif_Interface.OnvifEventServiceReference;
 using Onvif_Interface.OnvifPtzServiceReference;
 using Onvif_Interface.WsSecurity;
-using Onvif_Interface.OnvifEventServiceReference;
+using System.Net;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace SDS.Video.Onvif
 {
-    static class OnvifServices
+    internal static class OnvifServices
     {
-
         public static DeviceClient GetOnvifDeviceClient(string ip, int port, string username = "", string password = "")
         {
             EndpointAddress serviceAddress = new EndpointAddress(string.Format("http://{0}:{1}/onvif/device_service", ip, port));

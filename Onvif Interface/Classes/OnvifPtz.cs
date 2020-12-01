@@ -4,7 +4,7 @@ using System.IO;
 
 namespace SDS.Video.Onvif
 {
-    class OnvifPtz
+    internal class OnvifPtz
     {
         private string User;
         private string Password;
@@ -30,7 +30,9 @@ namespace SDS.Video.Onvif
             Password = password;
 
             if (string.IsNullOrEmpty(mediaUri) | string.IsNullOrEmpty(ptzUri))
+            {
                 throw new Exception("Media and/or PTZ URI is empty or null.  PTZ object cannot be created");
+            }
 
             PtzClient = OnvifServices.GetOnvifPTZClient(ptzUri, deviceTimeOffset, User, Password);
             MediaClient = OnvifServices.GetOnvifMediaClient(mediaUri, deviceTimeOffset, User, Password);
@@ -177,7 +179,9 @@ namespace SDS.Video.Onvif
             foreach (PTZPreset p in presets)
             {
                 if (p.token == presetToken)
+                {
                     return true;
+                }
             }
 
             return false;
@@ -205,6 +209,5 @@ namespace SDS.Video.Onvif
 
             return PtzAvailable;
         }
-
     }
 }

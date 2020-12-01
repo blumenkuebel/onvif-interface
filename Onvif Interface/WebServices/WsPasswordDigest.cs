@@ -25,7 +25,7 @@ namespace Onvif_Interface.WsSecurity
 
         /// <summary>
         /// Create password digest message inspector to insert SOAP security
-        /// header into the HTTP request (allows for time offset corrections 
+        /// header into the HTTP request (allows for time offset corrections
         /// in case device time and client time aren't synchronized)
         /// </summary>
         /// <param name="username">User</param>
@@ -62,12 +62,11 @@ namespace Onvif_Interface.WsSecurity
             return Convert.DBNull;
         }
 
-        #endregion
+        #endregion IClientMessageInspector Members
     }
 
     public class PasswordDigestBehavior : IEndpointBehavior
     {
-
         public string Username { get; set; }
         public string Password { get; set; }
         public double DeviceTimeOffset { get; set; }
@@ -79,8 +78,8 @@ namespace Onvif_Interface.WsSecurity
         }
 
         /// <summary>
-        /// Create password digest behavior that allows for time offset corrections 
-        /// in case device time and client time aren't synchronized.  
+        /// Create password digest behavior that allows for time offset corrections
+        /// in case device time and client time aren't synchronized.
         /// </summary>
         /// <param name="username">User</param>
         /// <param name="password">Password</param>
@@ -114,6 +113,6 @@ namespace Onvif_Interface.WsSecurity
             Debug.Print("PasswordDigestBehavior Validate");
         }
 
-        #endregion
+        #endregion IEndpointBehavior Members
     }
 }

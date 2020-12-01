@@ -8,7 +8,6 @@ namespace OnvifEvents
 {
     public static class OnvifServices
     {
-
         public static EventPortTypeClient GetEventClient(string ip, int port)
         {
             EndpointAddress serviceAddress = new EndpointAddress(string.Format("http://{0}:{1}/onvif/event_service", ip, port));
@@ -29,7 +28,6 @@ namespace OnvifEvents
             return eptc;
         }
 
-
         public static PullPointSubscriptionClient GetPullPointSubClient(string ip, int port)
         {
             EndpointAddress serviceAddress = new EndpointAddress(string.Format("http://{0}:{1}/onvif/event_service", ip, port));
@@ -45,8 +43,7 @@ namespace OnvifEvents
             return ppsc;
         }
 
-
-        public static PullPointSubscriptionClient GetPullPointSubClient(string ip, int port, string toHeaderAddr,  List<MessageHeader> headers)
+        public static PullPointSubscriptionClient GetPullPointSubClient(string ip, int port, string toHeaderAddr, List<MessageHeader> headers)
         {
             //EndpointAddress serviceAddress = new EndpointAddress(string.Format("http://{0}:{1}/onvif/event_service", ip, port));
             AddressHeader[] addrHeader; // = AddressHeader.CreateAddressHeader("Action", "http://www.w3.org/2005/08/addressing", "http://docs.oasis-open.org/wsn/bw-2/NotificationProducer/SubscribeRequest");
@@ -55,7 +52,6 @@ namespace OnvifEvents
             addrHeader[1] = AddressHeader.CreateAddressHeader("To", "http://www.w3.org/2005/08/addressing", toHeaderAddr);
             //addrHeader[1] = AddressHeader.CreateAddressHeader("MessageID", "http://www.w3.org/2005/08/addressing", "urn:uuid:e47b9746-c5c1-455e-839f-0db5bed7d8c7");
             //addrHeader[1] = AddressHeader.CreateAddressHeader("ReplyTo", "http://www.w3.org/2005/08/addressing", "http://www.w3.org/2005/08/addressing/anonymous");
-
 
             //MessageHeader[] msgHeader;
             //msgHeader = new MessageHeader[1];
@@ -86,7 +82,7 @@ namespace OnvifEvents
             var messageElement = new TextMessageEncodingBindingElement();
             messageElement.MessageVersion = MessageVersion.CreateVersion(EnvelopeVersion.Soap12, AddressingVersion.None);
             CustomBinding bind = new CustomBinding(messageElement, httpBinding);
-            
+
             PullPointClient client = new PullPointClient(bind, serviceAddress);
             return client;
         }
@@ -108,7 +104,6 @@ namespace OnvifEvents
 
         public static NotificationConsumerClient GetNotificationConsumerClient(string ip, int port, string subscription)
         {
-
             EndpointAddress serviceAddress = new EndpointAddress(string.Format("http://{0}:{1}/{2}", ip, port, subscription));
 
             HttpTransportBindingElement httpBinding = new HttpTransportBindingElement();
@@ -121,7 +116,6 @@ namespace OnvifEvents
             NotificationConsumerClient client = new NotificationConsumerClient(bind, serviceAddress);
             return client;
         }
-
 
         //public static SubscriptionManagerClient GetSubscriptionManagerClient(string ip, int port, List<MessageHeader> headers)
         public static SubscriptionManagerClient GetSubscriptionManagerClient(string uri) // string ip, int port, List<MessageHeader> headers)

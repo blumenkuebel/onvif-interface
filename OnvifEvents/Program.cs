@@ -1,24 +1,15 @@
-﻿using OnvifEvents.OnvifEventServiceReference;
-using SimpleWebServer;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace OnvifEvents
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             //WebServer ws = new WebServer(SendResponse, GetOnvifHttpPrefix(8080)); // "http://localhost:8080/test/");
             //ws.Run();

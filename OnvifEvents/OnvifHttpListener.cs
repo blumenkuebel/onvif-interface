@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace OnvifEvents
@@ -15,7 +14,7 @@ namespace OnvifEvents
     {
         private HttpListener http;
         private bool RunServer = false;
-        public bool IsListening { get; private set; } =  false;
+        public bool IsListening { get; private set; } = false;
 
         public event EventHandler Notification;
 
@@ -213,7 +212,7 @@ namespace OnvifEvents
             foreach (XElement x in elements.Elements())
             {
                 Console.WriteLine(x.Name.LocalName + " " + x.Value);
-                
+
                 if (x.HasElements)
                 {
                     ScanElements(x.Elements());

@@ -1,24 +1,21 @@
-﻿using System;
+﻿using OnvifEvents.OnvifEventServiceReference;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Net;
-using OnvifEvents.OnvifEventServiceReference;
+using System.Windows.Forms;
 using System.Xml;
-
 
 namespace OnvifEvents
 {
     public partial class EventForm : Form
     {
-        DateTime? SubTermTime;
-        Timer SubRenewTimer = new Timer();
-        string SubRenewUri;
-        SubscriptionManagerClient SubscriptionManagerClient;
-        OnvifHttpListener HttpListener = new OnvifHttpListener();
+        private DateTime? SubTermTime;
+        private Timer SubRenewTimer = new Timer();
+        private string SubRenewUri;
+        private SubscriptionManagerClient SubscriptionManagerClient;
+        private OnvifHttpListener HttpListener = new OnvifHttpListener();
 
         public EventForm()
         {
@@ -34,7 +31,9 @@ namespace OnvifEvents
         private void StartServer()
         {
             if (HttpListener.IsListening)
+            {
                 HttpListener.StopHttpServer();
+            }
 
             HttpListener.StartHttpServer(8080);
             HttpListener.Notification += HttpListener_Notification;
@@ -76,27 +75,37 @@ namespace OnvifEvents
             listBox1.Items.Add(string.Format("Result: {0}", result));
             listBox1.Items.Add(string.Format("Message Content Filter Dialect(s)"));
             foreach (string msg in msgContentFilter)
+            {
                 listBox1.Items.Add(string.Format("  {0}", msg));
+            }
 
             listBox1.Items.Add("");
             listBox1.Items.Add(string.Format("Message Content Schema Location(s)"));
             foreach (string msg in msgContentSchema)
+            {
                 listBox1.Items.Add(string.Format("  {0}", msg));
+            }
 
             listBox1.Items.Add("");
             listBox1.Items.Add(string.Format("Producer Properties Filter Dialect(s)"));
             foreach (string msg in producerProperties)
+            {
                 listBox1.Items.Add(string.Format("  {0}", msg));
+            }
 
             listBox1.Items.Add("");
             listBox1.Items.Add(string.Format("Topic Expression Dialect(s)"));
             foreach (string msg in topicExpDialect)
+            {
                 listBox1.Items.Add(string.Format("  {0}", msg));
+            }
 
             listBox1.Items.Add("");
             listBox1.Items.Add(string.Format("Topic Set item(s)"));
             foreach (XmlElement x in tst.Any)
+            {
                 listBox1.Items.Add("  " + x.Name);
+            }
 
             // 2. Get capabilities
             Capabilities c = eptc.GetServiceCapabilities();
@@ -249,7 +258,6 @@ namespace OnvifEvents
             //XmlElement[] pullMsgXml = { doc.CreateElement("test") };
 
             //ppsc.PullMessages("PT5S", 5, any, out terminationTime, out nmht);
-
         }
 
         public void test(string ip, int port)
@@ -313,7 +321,6 @@ namespace OnvifEvents
                     string key;
                     string data = message.Message.ChildNodes[1].Value;
                     listBox1.Items.Add(string.Format("  {0}\t{1}\t{2}\t{3}\t{4}", time, topic, operation, source, data));
-
                 }
 
                 //var oRenewResult = oSubscriptionManagerClient.Renew(new LIB.Cameras.ONVIF_WS.onvif10_events.Renew() { TerminationTime = "PT600S" });

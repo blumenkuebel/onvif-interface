@@ -6,7 +6,7 @@ using System.Timers;
 
 namespace SDS.Video.Onvif
 {
-    class OnvifEvents
+    internal class OnvifEvents
     {
         private System.DateTime? SubTermTime;
         private Timer SubRenewTimer = new Timer();
@@ -14,6 +14,7 @@ namespace SDS.Video.Onvif
         private SubscriptionManagerClient SubscriptionManagerClient;
 
         public event EventHandler Notification;
+
         private void OnNotification(string notification)
         {
             OnvifEventsStatusArgs e = new OnvifEventsStatusArgs(notification);

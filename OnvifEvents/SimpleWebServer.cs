@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Net;
-using System.Threading;
-using System.Linq;
 using System.Text;
+using System.Threading;
 
 // https://www.codehosting.net/blog/BlogEngine/post/Simple-C-Web-Server
 
@@ -16,20 +15,28 @@ namespace SimpleWebServer
         public WebServer(string[] prefixes, Func<HttpListenerRequest, string> method)
         {
             if (!HttpListener.IsSupported)
+            {
                 throw new NotSupportedException(
                     "Needs Windows XP SP2, Server 2003 or later.");
+            }
 
-            // URI prefixes are required, for example 
+            // URI prefixes are required, for example
             // "http://localhost:8080/index/".
             if (prefixes == null || prefixes.Length == 0)
+            {
                 throw new ArgumentException("prefixes");
+            }
 
             // A responder method is required
             if (method == null)
+            {
                 throw new ArgumentException("method");
+            }
 
             foreach (string s in prefixes)
+            {
                 _listener.Prefixes.Add(s);
+            }
 
             _responderMethod = method;
             _listener.Start();

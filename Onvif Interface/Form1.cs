@@ -1,16 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using System.ServiceModel.Discovery;
-using System.ServiceModel.Description;
-using System.Text;
-using System.Net;
-using System.ServiceModel;
-using System.Collections.Generic;
-using SDS.Video.Onvif;
-using Onvif_Interface.OnvifPtzServiceReference;
-using Onvif_Interface.OnvifDeviceManagementServiceReference;
+﻿using Onvif_Interface.OnvifDeviceManagementServiceReference;
 using Onvif_Interface.OnvifMediaServiceReference;
+using Onvif_Interface.OnvifPtzServiceReference;
+using SDS.Video.Onvif;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.ServiceModel.Description;
+using System.ServiceModel.Discovery;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Onvif_Interface
 {
@@ -18,12 +16,12 @@ namespace Onvif_Interface
     {
         private string IP;
         private int Port;
-        Dictionary<string, string> ServiceUris = new Dictionary<string, string>();
-        OnvifHttpListener HttpListener = new OnvifHttpListener();
-        OnvifEvents Event = new OnvifEvents();
-        System.Timers.Timer UpdateTime = new System.Timers.Timer(1000);
+        private Dictionary<string, string> ServiceUris = new Dictionary<string, string>();
+        private OnvifHttpListener HttpListener = new OnvifHttpListener();
+        private OnvifEvents Event = new OnvifEvents();
+        private System.Timers.Timer UpdateTime = new System.Timers.Timer(1000);
 
-        double DeviceTimeOffset = 0;
+        private double DeviceTimeOffset = 0;
 
         public Form1()
         {
@@ -66,9 +64,14 @@ namespace Onvif_Interface
         private void UpdateTime_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (!lblTimeLocal.IsDisposed)
+            {
                 Invoke((Action)(() => lblTimeLocal.Text = string.Format("Local Time: {0:s}", System.DateTime.Now)));
+            }
+
             if (!lblTimeUtc.IsDisposed)
+            {
                 Invoke((Action)(() => lblTimeUtc.Text = string.Format("UTC Time:  {0:s}", System.DateTime.UtcNow)));
+            }
         }
 
         private void Event_Notification(object sender, EventArgs e)
@@ -127,7 +130,7 @@ namespace Onvif_Interface
             gbxPtzControl.Visible = true;
 
             // We can now ask for information
-            // ONVIF application programmer guide (5.1.3) suggests checking time first 
+            // ONVIF application programmer guide (5.1.3) suggests checking time first
             // (no auth required) so time offset can be determined (needed for auth if applicable)
             client = OnvifServices.GetOnvifDeviceClient(IP.ToString(), Port);
             System.DateTime dt = GetDeviceTime(client);
@@ -135,7 +138,9 @@ namespace Onvif_Interface
 
             // Switch to an authenticated client if the username field contains something
             if (txtUser.Text != string.Empty)
+            {
                 client = OnvifServices.GetOnvifDeviceClient(IP.ToString(), Port, DeviceTimeOffset, txtUser.Text, txtPassword.Text);
+            }
 
             GetDeviceInfo(client);
             GetServices(client);
@@ -163,9 +168,13 @@ namespace Onvif_Interface
 
             double offset = (deviceTime - System.DateTime.UtcNow).TotalSeconds;
             if (Math.Abs(offset) >= 5)
+            {
                 lblDeviceTime.ForeColor = System.Drawing.Color.Red;
+            }
             else
+            {
                 lblDeviceTime.ForeColor = System.Drawing.Color.Black;
+            }
 
             lblDeviceTime.Text = string.Format("Device Time: {0:u} ({1:0.0} sec)", deviceTime, offset);
 
@@ -501,9 +510,13 @@ namespace Onvif_Interface
             if (digest != "")
             {
                 if (computedDigest == digest)
+                {
                     MessageBox.Show("Hash match" + txtPassword.Text);
+                }
                 else
+                {
                     MessageBox.Show(string.Format("Hash mismatch\nActual\t{0}\nCalc\t{1}", digest, computedDigest));
+                }
             }
         }
 
@@ -636,6 +649,24 @@ namespace Onvif_Interface
             {
                 lbxEvents.Items.Add("Warning: No subscription reference found for device.  Subscription cannot be activated.");
             }
+        }
+
+        private void lbxCapabilities_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && (e.KeyCode == Keys.C))
+            {
+                Clipboard.SetText(this.lbxCapabilities.SelectedItem.ToString());
+            }
+        }
+
+        private void txtIP_TextChanged(object sender, EventArgs e)
+        {
+            IP = txtIP.Text;
+        }
+
+        private void numPort_ValueChanged(object sender, EventArgs e)
+        {
+            Port = (int)numPort.Value;
         }
     }
 }

@@ -63,7 +63,6 @@
             this.btnPanLeft = new System.Windows.Forms.Button();
             this.btnTiltDown = new System.Windows.Forms.Button();
             this.btnTiltUp = new System.Windows.Forms.Button();
-            this.btnSetConnectInfo = new System.Windows.Forms.Button();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblIP = new System.Windows.Forms.Label();
@@ -100,7 +99,8 @@
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(110, 20);
             this.txtIP.TabIndex = 0;
-            this.txtIP.Text = "172.16.5.11";
+            this.txtIP.Text = "192.168.55.200";
+            this.txtIP.TextChanged += new System.EventHandler(this.txtIP_TextChanged);
             // 
             // lblDeviceTime
             // 
@@ -199,6 +199,7 @@
             this.lbxCapabilities.Name = "lbxCapabilities";
             this.lbxCapabilities.Size = new System.Drawing.Size(245, 316);
             this.lbxCapabilities.TabIndex = 9;
+            this.lbxCapabilities.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbxCapabilities_KeyDown);
             // 
             // numPort
             // 
@@ -218,10 +219,11 @@
             this.numPort.TabIndex = 1;
             this.numPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numPort.Value = new decimal(new int[] {
-            80,
+            8080,
             0,
             0,
             0});
+            this.numPort.ValueChanged += new System.EventHandler(this.numPort_ValueChanged);
             // 
             // gbxPtzControl
             // 
@@ -470,32 +472,21 @@
             this.btnTiltUp.Text = "Up";
             this.btnTiltUp.UseVisualStyleBackColor = true;
             // 
-            // btnSetConnectInfo
-            // 
-            this.btnSetConnectInfo.Location = new System.Drawing.Point(12, 63);
-            this.btnSetConnectInfo.Name = "btnSetConnectInfo";
-            this.btnSetConnectInfo.Size = new System.Drawing.Size(109, 30);
-            this.btnSetConnectInfo.TabIndex = 2;
-            this.btnSetConnectInfo.Text = "Set Connection Info";
-            this.btnSetConnectInfo.UseVisualStyleBackColor = true;
-            this.btnSetConnectInfo.Click += new System.EventHandler(this.btnSetConnectInfo_Click);
-            // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(12, 125);
+            this.txtUser.Location = new System.Drawing.Point(12, 84);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(110, 20);
             this.txtUser.TabIndex = 3;
-            this.txtUser.Text = "onvif";
+            this.txtUser.Text = "admin";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(12, 167);
+            this.txtPassword.Location = new System.Drawing.Point(12, 126);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(110, 20);
             this.txtPassword.TabIndex = 4;
-            this.txtPassword.Text = "Sierra123";
             // 
             // lblIP
             // 
@@ -518,7 +509,7 @@
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Location = new System.Drawing.Point(12, 109);
+            this.lblUser.Location = new System.Drawing.Point(12, 68);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(29, 13);
             this.lblUser.TabIndex = 15;
@@ -527,7 +518,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(12, 151);
+            this.lblPassword.Location = new System.Drawing.Point(12, 110);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(53, 13);
             this.lblPassword.TabIndex = 16;
@@ -536,7 +527,7 @@
             // chkShowPwd
             // 
             this.chkShowPwd.AutoSize = true;
-            this.chkShowPwd.Location = new System.Drawing.Point(128, 167);
+            this.chkShowPwd.Location = new System.Drawing.Point(128, 126);
             this.chkShowPwd.Name = "chkShowPwd";
             this.chkShowPwd.Size = new System.Drawing.Size(102, 17);
             this.chkShowPwd.TabIndex = 17;
@@ -575,7 +566,7 @@
             // lblTimeUtc
             // 
             this.lblTimeUtc.AutoSize = true;
-            this.lblTimeUtc.Location = new System.Drawing.Point(12, 221);
+            this.lblTimeUtc.Location = new System.Drawing.Point(12, 180);
             this.lblTimeUtc.Name = "lblTimeUtc";
             this.lblTimeUtc.Size = new System.Drawing.Size(55, 13);
             this.lblTimeUtc.TabIndex = 21;
@@ -584,7 +575,7 @@
             // lblTimeLocal
             // 
             this.lblTimeLocal.AutoSize = true;
-            this.lblTimeLocal.Location = new System.Drawing.Point(12, 208);
+            this.lblTimeLocal.Location = new System.Drawing.Point(12, 167);
             this.lblTimeLocal.Name = "lblTimeLocal";
             this.lblTimeLocal.Size = new System.Drawing.Size(59, 13);
             this.lblTimeLocal.TabIndex = 22;
@@ -607,7 +598,6 @@
             this.Controls.Add(this.lblIP);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUser);
-            this.Controls.Add(this.btnSetConnectInfo);
             this.Controls.Add(this.gbxPtzControl);
             this.Controls.Add(this.numPort);
             this.Controls.Add(this.gbxDeviceInfo);
@@ -659,7 +649,6 @@
         private System.Windows.Forms.Label lblPtzLocation;
         private System.Windows.Forms.Label lblPtzLocationY;
         private System.Windows.Forms.Label lblPtzLocationZoom;
-        private System.Windows.Forms.Button btnSetConnectInfo;
         private System.Windows.Forms.NumericUpDown numPtzCmdSpeed;
         private System.Windows.Forms.Label lblCmdSpeed;
         private System.Windows.Forms.Button btnPreset5;

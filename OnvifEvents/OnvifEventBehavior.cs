@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-using System.Text;
 
 namespace OnvifEvents
 {
     // These classes are used to parse received SOAP Messages
 
-    class OnvifEventBehavior : IEndpointBehavior
+    internal class OnvifEventBehavior : IEndpointBehavior
     {
         public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
         {
@@ -36,7 +33,6 @@ namespace OnvifEvents
         }
     }
 
-
     public class OnvifEventMessageInspector : IClientMessageInspector
     {
         public void AfterReceiveReply(ref Message reply, object correlationState)
@@ -50,6 +46,4 @@ namespace OnvifEvents
             return request;
         }
     }
-
-
 }
